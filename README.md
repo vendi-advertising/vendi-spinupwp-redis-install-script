@@ -35,13 +35,13 @@ This script automates the process of setting up dedicated Redis instances for in
 Uses the installer script that downloads the latest release and verifies checksums:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/vendi-advertising/vendi-spinupwp-redis-install-script/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/vendi-advertising/vendi-spinupwp-redis-install-script/refs/heads/main/install.sh | bash
 ```
 
 Or specify a version:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/vendi-advertising/vendi-spinupwp-redis-install-script/main/install.sh | bash -s v1.0.0
+curl -fsSL https://raw.githubusercontent.com/vendi-advertising/vendi-spinupwp-redis-install-script/refs/heads/main/install.sh | bash -s v1.0.0
 ```
 
 ### Manual Install with Verification
@@ -65,7 +65,7 @@ sudo ./install-redis-per-site.sh
 ⚠️ **Warning**: This skips verification and uses the latest code from main branch:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/vendi-advertising/vendi-spinupwp-redis-install-script/main/install-redis-per-site.sh | sudo bash
+curl -fsSL https://raw.githubusercontent.com/vendi-advertising/vendi-spinupwp-redis-install-script/refs/heads/main/install-redis-per-site.sh | sudo bash
 ```
 
 ### Clone Repository
