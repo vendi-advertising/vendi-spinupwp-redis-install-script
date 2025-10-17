@@ -82,6 +82,16 @@ else
 fi
 
 # Copy to current directory
+if [[ -f "${CURRENT_DIR}/${SCRIPT_FILE}" ]]; then
+    echo ""
+    warn "File ${SCRIPT_FILE} already exists in current directory."
+    read -p "Overwrite it? [y/N]: " overwrite
+    if [[ ! "$overwrite" =~ ^[Yy]$ ]]; then
+        info "Installation cancelled. Existing file not modified."
+        exit 0
+    fi
+fi
+
 cp "${SCRIPT_FILE}" "${CURRENT_DIR}/${SCRIPT_FILE}"
 chmod +x "${CURRENT_DIR}/${SCRIPT_FILE}"
 
