@@ -34,6 +34,9 @@ TEMP_DIR=$(mktemp -d)
 SCRIPT_FILE="install-redis-per-site.sh"
 CHECKSUM_FILE="checksums.txt"
 
+# Save current directory before changing to temp
+CURRENT_DIR=$(pwd)
+
 cleanup() {
     rm -rf "$TEMP_DIR"
 }
@@ -79,7 +82,6 @@ else
 fi
 
 # Copy to current directory
-CURRENT_DIR=$(pwd)
 cp "${SCRIPT_FILE}" "${CURRENT_DIR}/${SCRIPT_FILE}"
 chmod +x "${CURRENT_DIR}/${SCRIPT_FILE}"
 
