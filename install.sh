@@ -43,10 +43,13 @@ cd "$TEMP_DIR"
 
 if [ "$VERSION" = "latest" ]; then
     info "Detecting latest release..."
-    VERSION=$(curl -fsSL "https://api.github.com/repos/${REPO}/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+    VERSION=$(curl -fsSL "https://api.github.com/repos/${REPO}/releases/latest" 2>/dev/null | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
 
     if [ -z "$VERSION" ]; then
-        error_exit "Could not detect latest version. Please specify a version: ./install.sh v1.0.0"
+        error_exit "No releases found. Please create a release first with: git tag -a v1.0.0 -m \"Initial release\" && git push origin v1.0.0
+
+Or specify a version manually:
+  curl -fsSL https://raw.githubusercontent.com/${REPO}/refs/heads/main/install.sh | bash -s v1.0.0"
     fi
 
     success "Latest version: $VERSION"
