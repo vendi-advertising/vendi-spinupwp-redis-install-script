@@ -18,7 +18,6 @@ This script automates the process of setting up dedicated Redis instances for in
   - Optional SpinupWP plugin installation/activation
 - **Instance Overview**: Shows before/after view of all Redis instances
 - **Comprehensive Validation**: Checks prerequisites, ports, memory formats, and service status
-- **Color-Coded Output**: Easy-to-read success/error/warning messages
 
 ## Prerequisites
 
@@ -26,7 +25,7 @@ This script automates the process of setting up dedicated Redis instances for in
 - Root/sudo access
 - Redis installed (`redis-server` and `redis-cli`)
 - Sites in `/sites/` directory
-- (Optional) WP-CLI for WordPress configuration
+- WP-CLI for WordPress configuration
 
 ## SHA256 Checksum Verification
 
@@ -51,45 +50,6 @@ Uses the installer script that downloads the latest release and verifies checksu
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/vendi-advertising/vendi-spinupwp-redis-install-script/refs/heads/main/install.sh | bash
-```
-
-Or specify a version:
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/vendi-advertising/vendi-spinupwp-redis-install-script/refs/heads/main/install.sh | bash -s v1.0.0
-```
-
-### Manual Install with Verification
-
-```bash
-# Download latest release
-VERSION=$(curl -fsSL https://api.github.com/repos/vendi-advertising/vendi-spinupwp-redis-install-script/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
-curl -fsSL "https://github.com/vendi-advertising/vendi-spinupwp-redis-install-script/releases/download/${VERSION}/install-redis-per-site.sh" -o install-redis-per-site.sh
-curl -fsSL "https://github.com/vendi-advertising/vendi-spinupwp-redis-install-script/releases/download/${VERSION}/checksums.txt" -o checksums.txt
-
-# Verify checksum
-sha256sum -c checksums.txt
-
-# Run if verification passes
-chmod +x install-redis-per-site.sh
-sudo ./install-redis-per-site.sh
-```
-
-### Quick Install from Main (Not Recommended for Production)
-
-⚠️ **Warning**: This skips verification and uses the latest code from main branch:
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/vendi-advertising/vendi-spinupwp-redis-install-script/refs/heads/main/install-redis-per-site.sh | sudo bash
-```
-
-### Clone Repository
-
-```bash
-git clone https://github.com/vendi-advertising/vendi-spinupwp-redis-install-script.git
-cd vendi-spinupwp-redis-install-script
-chmod +x install-redis-per-site.sh
-sudo ./install-redis-per-site.sh
 ```
 
 ## Usage
