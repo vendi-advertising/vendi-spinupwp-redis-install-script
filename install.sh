@@ -78,31 +78,24 @@ else
     error_exit "Checksum verification failed! The script may be corrupted or tampered with."
 fi
 
-# Make executable
-chmod +x "${SCRIPT_FILE}"
+# Copy to current directory
+CURRENT_DIR=$(pwd)
+cp "${SCRIPT_FILE}" "${CURRENT_DIR}/${SCRIPT_FILE}"
+chmod +x "${CURRENT_DIR}/${SCRIPT_FILE}"
 
 echo ""
 echo "========================================"
-echo "Script ready to run!"
+echo "Script Downloaded and Verified!"
 echo "========================================"
 echo ""
-echo "The script has been verified and is ready to install."
+success "Checksum verified! Script is authentic."
 echo ""
-echo "To run it now:"
-echo "  sudo $TEMP_DIR/${SCRIPT_FILE}"
+echo "The verified script has been saved to:"
+echo "  ${CURRENT_DIR}/${SCRIPT_FILE}"
 echo ""
-echo "Or copy to current directory and run:"
-echo "  cp $TEMP_DIR/${SCRIPT_FILE} ./${SCRIPT_FILE}"
+echo "To run the installation:"
 echo "  sudo ./${SCRIPT_FILE}"
 echo ""
-read -p "Run the installation script now? [Y/n]: " run_now
-
-if [[ ! "$run_now" =~ ^[Nn]$ ]]; then
-    echo ""
-    exec sudo "$TEMP_DIR/${SCRIPT_FILE}"
-else
-    info "Installation cancelled. Script is available at: $TEMP_DIR/${SCRIPT_FILE}"
-
-    # Don't cleanup if user declined
-    trap - EXIT
-fi
+echo "Or review it first:"
+echo "  less ./${SCRIPT_FILE}"
+echo ""
