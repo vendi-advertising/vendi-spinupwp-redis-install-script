@@ -28,20 +28,20 @@ This script automates the process of setting up dedicated Redis instances for in
 - Sites in `/sites/` directory
 - (Optional) WP-CLI for WordPress configuration
 
-## SHA256 Checksum
+## SHA256 Checksum Verification
 
-For the latest release, verify the script's SHA256 checksum matches:
+The most recent version's checksum is:
 
 ```
-2e360bfe310b76b873430674b7ae49ed311fcdac5f9e9f4de3cfc1cedfa35308  install-redis-per-site.sh
+2e360bfe310b76b873430674b7ae49ed311fcdac5f9e9f4de3cfc1cedfa35308
 ```
 
-To manually verify:
+To manually verify the downloaded script:
 ```bash
 sha256sum install-redis-per-site.sh
 ```
 
-Compare the output with the checksum above. They must match exactly.
+The output must match the checksum above exactly.
 
 ## Installation
 
