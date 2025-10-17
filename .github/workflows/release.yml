@@ -1,0 +1,55 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Generate checksums
+        run: |
+          sha256sum install-redis-per-site.sh > checksums.txt
+          cat checksums.txt
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            install-redis-per-site.sh
+            checksums.txt
+          body: |
+            ## Redis Per-Site Installation Script for SpinupWP
+
+            ### Installation
+
+            **Quick install (with verification):**
+            ```bash
+            curl -fsSL https://github.com/${{ github.repository }}/releases/download/${{ github.ref_name }}/install-redis-per-site.sh -o install-redis-per-site.sh
+            curl -fsSL https://github.com/${{ github.repository }}/releases/download/${{ github.ref_name }}/checksums.txt -o checksums.txt
+            sha256sum -c checksums.txt
+            chmod +x install-redis-per-site.sh
+            sudo ./install-redis-per-site.sh
+            ```
+
+            **One-liner (latest from main - use at your own risk):**
+            ```bash
+            curl -fsSL https://raw.githubusercontent.com/${{ github.repository }}/main/install-redis-per-site.sh | sudo bash
+            ```
+
+            ### Checksums
+            ```
+            $(cat checksums.txt)
+            ```
+
+            See [README.md](https://github.com/${{ github.repository }}/blob/main/README.md) for full documentation.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
